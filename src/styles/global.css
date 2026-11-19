@@ -18,7 +18,8 @@ button:focus-visible, input:focus-visible, select:focus-visible {
 
 .app-shell {
   min-height: 100svh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
   display: grid;
   place-items: center;
@@ -228,7 +229,8 @@ h2 { font-size: clamp(39px, 7vw, 52px); margin-top: 9px; }
 .yes-confirmation strong { font: 700 30px 'Playfair Display', serif; color: #d50050; }
 .yes-confirmation span { margin-top: 7px; font-size: 11px; line-height: 1.55; }
 .heart-confetti {
-  position: absolute;
+  position: fixed;
+  z-index: 30;
   inset: 50% auto auto 50%;
   width: 1px;
   height: 1px;
@@ -353,6 +355,147 @@ h2 { font-size: clamp(39px, 7vw, 52px); margin-top: 9px; }
 .email-error-detail { display: block; margin-top: 3px; color: #98747e; font-size: 8px; }
 
 @keyframes sending-spin { to { transform: rotate(360deg); } }
+
+/* Playful, lightweight life for all invitation screens */
+.invitation-card .top-ribbon,
+.invitation-card .step-label,
+.invitation-card .confirmation-sparkle {
+  animation: soft-arrive .7s cubic-bezier(.22,1,.36,1) both;
+}
+.invitation-card h1,
+.invitation-card h2 {
+  animation: title-arrive .72s cubic-bezier(.22,1,.36,1) .08s both;
+}
+.invitation-card .subtitle {
+  animation: fade-slide-up .65s ease-out .16s both;
+}
+.invitation-card .meme-frame,
+.invitation-card .step-icon,
+.invitation-card .summary-grid,
+.invitation-card .food-grid,
+.invitation-card .form-fields,
+.invitation-card .question-actions,
+.invitation-card .food-actions,
+.invitation-card .plan-actions,
+.invitation-card .confirmation-actions,
+.invitation-card .send-email-button {
+  animation: fade-slide-up .72s cubic-bezier(.22,1,.36,1) .22s both;
+}
+.invitation-card .step-icon,
+.invitation-card .confirmation-sparkle {
+  animation: icon-breathe 3.2s ease-in-out infinite;
+}
+.meme-frame img { transition: transform .45s cubic-bezier(.22,1,.36,1), filter .45s ease; }
+.meme-frame:hover img { transform: scale(1.035); filter: saturate(1.04) brightness(1.02); }
+.detail-card,
+.input-wrap,
+.summary-grid div,
+.food-option,
+.primary-button,
+.secondary-button,
+.back-button,
+.change-button,
+.calendar-button,
+.save-button,
+.send-email-button,
+.music-player {
+  transition:
+    transform .22s cubic-bezier(.22,1,.36,1),
+    box-shadow .22s ease,
+    filter .22s ease,
+    background .22s ease;
+}
+.primary-button:hover,
+.calendar-button:hover,
+.save-button:hover,
+.send-email-button:hover:not(:disabled),
+.secondary-button:hover,
+.back-button:hover,
+.change-button:hover,
+.music-player:hover {
+  transform: translateY(-3px) scale(1.015);
+  filter: brightness(1.02);
+}
+.primary-button:active,
+.calendar-button:active,
+.save-button:active,
+.send-email-button:active,
+.secondary-button:active,
+.back-button:active,
+.change-button:active {
+  transform: translateY(0) scale(.96);
+}
+.input-wrap:hover,
+.summary-grid div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(213, 0, 80, .08);
+}
+.food-option.selected {
+  animation: selected-pop .45s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 10px 24px rgba(213, 0, 80, .24);
+}
+.food-option:hover { box-shadow: 0 8px 17px rgba(213, 0, 80, .10); }
+.confirmation-card .meme-frame {
+  animation: celebration-arrive .8s cubic-bezier(.22,1,.36,1) .15s both,
+             gentle-float 4s ease-in-out 1s infinite;
+}
+.confirmation-card h2 {
+  animation: date-title-arrive .78s cubic-bezier(.22,1,.36,1) both;
+}
+.confirmation-card .summary-grid div:nth-child(1) { animation-delay: .28s; }
+.confirmation-card .summary-grid div:nth-child(2) { animation-delay: .36s; }
+.confirmation-card .summary-grid div:nth-child(3) { animation-delay: .44s; }
+.confirmation-card .summary-grid div:nth-child(4) { animation-delay: .52s; }
+.background-sparkle {
+  position: absolute;
+  z-index: 1;
+  color: rgba(213, 0, 80, .32);
+  font-size: 7px;
+  animation: sparkle-twinkle 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+.petal { filter: drop-shadow(0 2px 3px rgba(173, 53, 86, .08)); }
+.floating-heart { filter: drop-shadow(0 2px 4px rgba(213, 0, 80, .08)); }
+.yes-growth { animation: yes-heartbeat 1.25s ease-in-out infinite; }
+
+@keyframes soft-arrive {
+  from { opacity: 0; transform: translateY(-6px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes title-arrive {
+  from { opacity: 0; transform: translateY(12px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes date-title-arrive {
+  0% { opacity: 0; transform: scale(.78) rotate(-3deg); }
+  65% { opacity: 1; transform: scale(1.04) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes icon-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.04); }
+}
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+@keyframes celebration-arrive {
+  from { opacity: 0; transform: translateY(18px) scale(.82) rotate(-5deg); }
+  to { opacity: 1; transform: translateY(0) scale(1) rotate(-1deg); }
+}
+@keyframes selected-pop {
+  0% { transform: scale(.94); }
+  60% { transform: scale(1.055); }
+  100% { transform: scale(1); }
+}
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: .15; transform: scale(.7) rotate(0deg); }
+  50% { opacity: .75; transform: scale(1.25) rotate(45deg); }
+}
 
 .confirmation-card { min-height: 620px; height: auto; overflow: visible; }
 .confirmation-sparkle { color: #d50050; margin-bottom: 4px; }

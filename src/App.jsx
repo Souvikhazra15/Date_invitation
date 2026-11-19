@@ -84,6 +84,19 @@ function Petals() {
           ♥
         </span>
       ))}
+      {Array.from({ length: 14 }, (_, index) => (
+        <span
+          key={`sparkle-${index}`}
+          className="background-sparkle"
+          style={{
+            left: `${(index * 53 + 9) % 100}%`,
+            top: `${(index * 31 + 12) % 92}%`,
+            animationDelay: `${(index % 7) * -0.65}s`,
+          }}
+        >
+          ✦
+        </span>
+      ))}
     </div>
   )
 }
@@ -125,7 +138,11 @@ function Card({ children, className = '' }) {
       initial={{ opacity: 0, y: 18, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -12, scale: 0.98 }}
-      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        opacity: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+        scale: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+        y: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+      }}
     >
       {children}
     </motion.div>
@@ -305,7 +322,8 @@ export default function App() {
   const handleYesClick = () => {
     setNoClicks(0)
     setShowYesConfirmation(true)
-    window.setTimeout(() => setScreen(1), 1250)
+    setScreen(1)
+    window.setTimeout(() => setShowYesConfirmation(false), 1500)
   }
 
   const positionStage = noClicks === 0 ? 0 : (noClicks - 1) % 6
@@ -334,6 +352,7 @@ export default function App() {
     <main className="app-shell">
       <Petals />
       <MusicPlayer />
+      {showYesConfirmation && <div className="global-confetti" aria-hidden="true"><HeartConfetti /></div>}
       <AnimatePresence mode="wait">
         {screen === 0 && (
           <Card key="question" className="question-card">
