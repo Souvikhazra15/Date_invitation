@@ -22,7 +22,7 @@ const initialChoices = {
   date: '2026-11-24',
   time: '18:00',
   plan: 'Surprise date',
-  food: 'Brunch',
+  food: 'Italian date',
 }
 
 const noMessages = [
@@ -45,14 +45,14 @@ const plans = [
 ]
 
 const foods = [
-  ['Italian', '🍝'],
-  ['Sushi', '🍣'],
-  ['Pizza', '🍕'],
-  ['Tacos', '🌮'],
-  ['Burgers', '🍔'],
-  ['Ramen', '🍜'],
-  ['Brunch', '🥞'],
-  ['Dessert First', '🍰'],
+  ['Italian date', '🍕'],
+  ['Chinese cravings', '🥟'],
+  ['Desi date', '🍛'],
+  ['Mexican mood', '🌮'],
+  ['Amdavadi special', '🧆'],
+  ['Dessert date', '🍰'],
+  ['Café date', '☕'],
+  ['Asian adventure', '🍜'],
   ['You Pick', '💗'],
 ]
 
